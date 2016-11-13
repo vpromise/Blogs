@@ -46,8 +46,8 @@
 
 ## 简单的例子说明
 
-![](./1.png)
-![](./2.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/GAN/1.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/GAN/2.png)
 
 且看上面四张图a,b,c,d. 黑色的点状线代表M所产生的一些数据，红色的线代表我们自己模拟的分布G，蓝色的线代表着分类模型D。
 
@@ -56,14 +56,14 @@ c图表示保持D不动，优化G，直到混淆程度最高。d图表示，多�
 
 ## 形式化
 
-![](./3.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/GAN/3.png)
 
 将上述例子所描述的过程公式化，得到如上公式。公式中D(x)表示x属于分布M的概率，因而，优化D的时候就是让V(D,G)最大，优化G的时候就是让V(D,G)最小。
 
 其中，x~p<sub>data</sub>(x) 表示x取自真正的分布。
 z~p<sub>z</sub>(z) 表示z取自我们模拟的分布。G表示生成模型，D表示分类模型。
 
-![](./4.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/GAN/4.png)
 
 上述即是G和D的训练过程。其中在每次迭代中，梯度下降K次来训练D，然后梯度下降一次来训练G，之所以这样做，是因为D的训练是一个非常耗时的操作，且在有限的集合上，训练次数过多容易过拟合。
 
@@ -75,14 +75,14 @@ z~p<sub>z</sub>(z) 表示z取自我们模拟的分布。G表示生成模型，D�
 
 第一个证明是，当G固定的时候，D会有唯一的最优解。真实描述如下：
 
-![](./5.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/GAN/5.png)
 
 证明如下：
 
 - 首先，对V(G,D)进行变换
-	![](./6.png)
+	![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/GAN/6.png)
 - 对于任意的a,b ∈ R<sup>2</sup> \ {0, 0}, 下面的式子在a/(a+b)处达到最优。
-	![](./7.png)
+	![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/GAN/7.png)
 	
 得证！
 
@@ -90,21 +90,21 @@ z~p<sub>z</sub>(z) 表示z取自我们模拟的分布。G表示生成模型，D�
 
 根据证明一，可以对V(G,D)中最大化D的步骤进行变换。
 
-![](./8.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/GAN/8.png)
 
 从而得到定理
 
-![](./9.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/GAN/9.png)
 
 直接带入p<sub>g</sub>=p<sub>data</sub>可得-log4，当入p<sub>g</sub>!=p<sub>data</sub>时，得到
 
-![](./10.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/GAN/10.png)
 
 ## 命题二
 
 命题二原文如下：
 
-![](./11.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/GAN/11.png)
 
 这个定理的证明需要用到凸函数的某个似乎是很明显的定理，即，通过凸函数的上确界的次导数可以找到函数在最大值时的导数。这个理论应用到G和D中就是在G不变时，D是拥有唯一的最优值的凸函数，因而可以得到。 但因为我对凸优化理论尚不熟悉，所以没有理解透彻这个地方。
 
@@ -114,7 +114,7 @@ z~p<sub>z</sub>(z) 表示z取自我们模拟的分布。G表示生成模型，D�
 
 实验就是去拟合Guassian Parzen Windown，具体细节略过。结果如下：
 
-![](./12.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/GAN/12.png)
 
 # 优势和劣势
 
@@ -131,7 +131,7 @@ z~p<sub>z</sub>(z) 表示z取自我们模拟的分布。G表示生成模型，D�
 
 各种生成模型的对比如下：
 
-![](./13.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/GAN/13.png)
 
 
 
