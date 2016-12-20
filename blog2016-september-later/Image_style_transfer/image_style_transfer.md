@@ -32,11 +32,11 @@
 
 因而，我们就得到了内容的loss。
 
-![](./1.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/Image_style_transfer/1.png)
 
 求导即为：
 
-![](./2.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/Image_style_transfer/2.png)
 
 有了这个公式之后要怎么做呢？ 使用现在公布的训练好的某些CNN网络，随机初始化一个输入图片大小的噪声图像x，然后保持CNN参数不变，将原始图片P和x输入进网络，然后对x求导，这样，x就会在内容上越来越趋近于P。
 
@@ -48,7 +48,7 @@
 - A<sup>l</sup>: 风格图片某一层的风格特征表示。
 - G<sup>l</sup>: 生成图片某一层的风格特征表示，大小为N<sub>l</sub> * N<sub>l</sub>
 
-![](./3.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/Image_style_transfer/3.png)
 
 其中，G<sup>l</sup><sub>ij</sub>的值是l层第i个feature map和第j个feature map的内积。
 
@@ -56,15 +56,15 @@
 
 单独某层的损失函数：
 
-![](./4.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/Image_style_transfer/4.png)
 
 各层综合的损失函数：
 
-![](./5.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/Image_style_transfer/5.png)
 
 求偏导：
 
-![](./6.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/Image_style_transfer/6.png)
 
 与内容表示类似，如果我们用随机初始化的x，保持CNN参数不变，将风格图片A和x输入进网络，然后对x求导，x就会在风格上趋近于A。
 
@@ -74,17 +74,17 @@
 
 图的上半部分是风格重建，由图可见，越用高层的特征，风格重建的就越粗粒度化。下半部分是内容重建，由图可见，越是底层的特征，重建的效果就越精细，越不容易变形。
 
-![](./7.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/Image_style_transfer/7.png)
 
 ## 风格转换
 
 有了内容与风格，风格转换就呼之欲出了，即两种loss的加权。
 
-![](./9.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/Image_style_transfer/9.png)
 
 也可如图示：
 
-![](./8.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/Image_style_transfer/8.png)
 
 即同时将三张图片(a, p, x)输入进三个相同的网络，对a求出风格特征，对p求出内容特征，然后对x求导，这样，得到的x就有a的风格和p的内容。
 
@@ -102,13 +102,13 @@
 
 比例越大，内容就越强势。
 
-![](./14.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/Image_style_transfer/14.png)
 
 ## 层级的选择
 
 固定住风格的层级，变动内容的层级，可以看到，内容层级越低，结果图片中的内容就越明显。
 
-![](./15.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/Image_style_transfer/15.png)
 
 ## 初始化方法的选择
 
@@ -118,19 +118,19 @@
 
 可以看到，初始化的不同似乎对最后结果影响不大。
 
-![](./16.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/Image_style_transfer/16.png)
 
 # 效果
 
 一张图片对应到各种风格：
 
-![](./10.png)
-![](./11.png)
-![](./12.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/Image_style_transfer/10.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/Image_style_transfer/11.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/Image_style_transfer/12.png)
 
 照片风格转换：
 
-![](./13.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/Image_style_transfer/13.png)
 
 # 讨论
 
