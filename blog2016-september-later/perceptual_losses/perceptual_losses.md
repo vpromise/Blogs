@@ -16,7 +16,7 @@
 
 下面这个网络图是论文的精华所在。图中将网络分为Transform网络和Loss网络两种，在使用中，Transform网络用来对图像进行转换，它的参数是变化的，而Loss网络，则保持参数不变，Transform的结果图，风格图和内容图都通过Loss Net得到每一层的feature激活值，并以之进行Loss计算。
 
-![](./1.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/perceptual_losses/1.png)
 
 在风格转换上，输入x=y<sub>c</sub>是内容图片。而在图片高清化上，x是低分辨率图片，内容图片是高分辨率图片，风格图片未曾使用。
 
@@ -55,29 +55,29 @@
 
 ## Feature Reconstruction Loss
 
-![](./2.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/perceptual_losses/2.png)
 
 - j表示网络的第j层。
 - C<sub>j</sub>H<sub>j</sub>W<sub>j</sub>表示第j层的feature_map的size
 
 使用不同层的重建效果如下：
 
-![](./5.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/perceptual_losses/5.png)
 
 ## Style Reconstruction Loss
 
 对于风格重建的损失函数，首先要先计算Gram矩阵，
 
-![](./3.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/perceptual_losses/3.png)
 
 产生的feature_map的大小为C<sub>j</sub>H<sub>j</sub>W<sub>j</sub>，可以看成是C<sub>j</sub>个特征，这些特征两两之间的内积的计算方式如上。
 
-![](./4.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/perceptual_losses/4.png)
 
 两张图片，在loss网络的每一层都求出Gram矩阵，然后对应层之间计算欧式距离，最后将不同层的欧氏距离相加，得到最后的风格损失。
 
 不同层的风格重建效果如下：
-![](./6.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/perceptual_losses/6.png)
 
 ## Simple Loss Function
 
@@ -86,7 +86,7 @@
 
 # Loss对比
 
-![](./7.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/perceptual_losses/7.png)
 
 在图像风格转换任务上，针对不同分辨率的图像，Loss值在Perceptual Loss(ours)和[图像风格转换](http://blog.csdn.net/stdcoutzyx/article/details/53771471)([10])以及内容图片上的。
 
@@ -94,7 +94,7 @@
 
 而就时间来看：
 
-![](./8.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/perceptual_losses/8.png)
 
 可以提升几百倍，在GPU上0.0015s可以达到相当的效果，在CPU上更具实用性。
 
@@ -102,24 +102,24 @@
 
 ## 风格转换
 
-![](./9.png)
-![](./10.png)
-![](./11.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/perceptual_losses/9.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/perceptual_losses/10.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/perceptual_losses/11.png)
 
 虽然风格转换是在256的图片上训练的，但也可以应用到其他size上，比如512的
 
-![](./12.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/perceptual_losses/12.png)
 
 ## 图片超清
 
 4倍清晰度提升：
 
-![](./13.png)
-![](./14.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/perceptual_losses/13.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/perceptual_losses/14.png)
 
 8倍清晰度提升：
 
-![](./15.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/perceptual_losses/15.png)
 
 # 总结
 
