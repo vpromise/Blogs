@@ -23,19 +23,19 @@ MRF算法，全程马尔科夫随机场，所谓的马尔科夫特性，就是�
 
 ## MRF损失函数
 
-![](./1.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/MRF_CNN/1.png)
 
 由公式可知，待生成图像中的MRF Loss是由各个patch的损失值加起来的。而每个patch的损失值则是该patch A与在风格图像中的最接近A的patch的欧式距离，该损失是基于feature_map的。
 
 而最接近则是用NN(i)来计算的。
 
-![](./2.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/MRF_CNN/2.png)
 
 这个计算过程看似和CNN格格不入，会使得CNN不能用反向传播的形式求导图像。但可以用一种巧妙的方法将其转换为CNN支持的方式，后续会介绍。
 
 ## 内容损失函数
 
-![](./3.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/MRF_CNN/3.png)
 
 和[2]中的方法类似，计算待生成图像和内容图像在网络某层的feature_map上的欧氏距离。
 
@@ -43,13 +43,13 @@ MRF算法，全程马尔科夫随机场，所谓的马尔科夫特性，就是�
 
 为了保证平滑，添加平方梯度的regularizer项。
 
-![](./5.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/MRF_CNN/5.png)
 
 ## Loss
 
 总的损失函数即上述几个的加权和：
 
-![](./4.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/MRF_CNN/4.png)
 
 # 实现细节
 
@@ -91,13 +91,13 @@ MRF算法，全程马尔科夫随机场，所谓的马尔科夫特性，就是�
 
 ## Neural Matching
 
-![](./6.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/MRF_CNN/6.png)
 
 高层特征找相似patch比pixel要好。
 
 ## Neural Blending
 
-![](./7.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/MRF_CNN/7.png)
 
 高层特征的混合比pixel要好，但太高层或太底层也不稳定。
 
@@ -105,21 +105,21 @@ MRF算法，全程马尔科夫随机场，所谓的马尔科夫特性，就是�
 
 比较MRF损失添加前和添加后的合成结果，
 
-![](./8.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/MRF_CNN/8.png)
 
 上面一行是添加了MRF的，下面则是没有添加的。由于上面那行和风格图像中的patch几乎没区别，就没有画。
 
 # 效果图
 
-![](./9.png)
-![](./10.png)
-![](./11.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/MRF_CNN/9.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/MRF_CNN/10.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/MRF_CNN/11.png)
 
 ## Limit
 
 当然，MRF的方法也有限制，那就是只在内容图像中的patch和风格图像中的patch可以吻合的比较好的时候才会有效。否则，那就会倾向于把整幅图都变化了。如
 
-![](./12.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/MRF_CNN/12.png)
 
 # 总结
 
