@@ -8,7 +8,7 @@
 
 # 语言模型
 
-![](./1.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/GCN/1.png)
 
 所谓的语言模型，即是指在得知前面的若干个单词的时候，下一个位置上出现的某个单词的概率。
 
@@ -18,8 +18,8 @@ LSTM模型一般会将单词embedding到连续空间，然后输入进LSTM，从
 
 # 门限卷积
 
-![](./2.png)
-![](./3.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/GCN/2.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/GCN/3.png)
 
 所谓的门限卷积，其核心在于为卷积的激活值添加一个门限开关，来决定其有多大的概率传到下一层去。下面一步步对上图进行解析。
 
@@ -29,7 +29,7 @@ LSTM模型一般会将单词embedding到连续空间，然后输入进LSTM，从
 
 之后就是门限单元，A和B进行element-wise的相乘，得到卷积后的结果。卷积单元和门限单元加起来形成一个卷积层。
 
-![](./4.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/GCN/4.png)
 
 经过多个这样的卷积层之后，再将其输入到SoftMax中，得到最后的预测。
 
@@ -45,13 +45,13 @@ LSTM模型一般会将单词embedding到连续空间，然后输入进LSTM，从
 
 LSTM中有input门和forget门两种，这两种缺一则会导致有些信息的缺失。而卷积中，经过实验，不需要forget gate。
 
-![](./5.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/GCN/5.png)
 
 而LSTM中使用的input门，如上。这种在卷积上却容易导致vanishing问题。因为tanh‘和σ’都是小于1的值。
 
 因而，在卷积上，使用：
 
-![](./6.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/GCN/6.png)
 
 该方法存在一路使得X的导数可以不被downscale的传下去。
 
@@ -69,14 +69,14 @@ LSTM中有input门和forget门两种，这两种缺一则会导致有些信息�
 
 ## 效果测试
 
-![](./8.png)
-![](./9.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/GCN/8.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/GCN/9.png)
 
 单GPU上效果最好。
 
 ## 性能测试
 
-![](./10.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/GCN/10.png)
 
 Throughput是指在并行化条件下最大输出。
 Responsiveness是指序列化的处理输入。
@@ -84,7 +84,7 @@ Responsiveness是指序列化的处理输入。
 
 ## 不同门限测试
 
-![](./11.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/GCN/11.png)
 
 - GTU: tanh(X\*W+b)⊗σ(X\*V+c)
 - GLU: (X\*W+b)⊗σ(X\*V+c)
@@ -95,7 +95,7 @@ Responsiveness是指序列化的处理输入。
 
 上一个实验证明了Gated linear unit深受Linear unit的好处。这里评测一下GLU和纯线性模型的比较。
 
-![](./12.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/GCN/12.png)
 
 - Bilinear: (X\*W+b)⊗(X\*V+c)
 
@@ -103,15 +103,15 @@ Responsiveness是指序列化的处理输入。
 
 ## 模型深度测试
 
-![](./13.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/GCN/13.png)
 
 ## Context Size测试
 
-![](./14.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/GCN/14.png)
 
 ## 训练测试
 
-![](./15.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/GCN/15.png)
 
 # 参考文献
 
