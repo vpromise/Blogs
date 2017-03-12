@@ -18,22 +18,20 @@
 
 数据集D:
 
-![](./2.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/pixel_recursive_sr/2.png)
 
 为了求得θ，使用最大似然概率的方法使得当前数据集D出现的概率最大。
-![](./1.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/pixel_recursive_sr/1.png)
 
 # Independent Failure
 
 为了验证上述问题的存在，论文设想了一种极端情况。
 
-![](./3.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/pixel_recursive_sr/3.png)
 
 如上图所示，为了简便起见，基于MNist数据集生成一个新的数据集，生成方法如下，将MNIST数据集中的图片A长宽各扩大两倍，每张图片可以生成两张图片A1和A2，A1中A处于右下角，A2中A处于左上角。
 
 把原图当做低分辨率图片，生成的图当成高分辨率图片。使用现在的方法进行训练，得到的模型，在生成图像的时候，会产生上图下半部分的情况。即每个像素点可能等概率的投射到左上部分和右下部分，从而导致生成的图片是错误的。而引入Pixel CNN后，像素之间产生了依赖关系，这种情况则不会发生。
-
-
 
 # Pixel CNN引入
 
@@ -41,7 +39,7 @@
 
 而在图像超清中，将要引入的则是让像素之间有相互依赖的关系，这样，就可以保证不同的部分，其高清版的选择是一致的。
 
-![](./4.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/pixel_recursive_sr/4.png)
 
 模型架构如上图。其中conditioning network是一个将低分辨率图像生成高分辨图像的网络，它可以像素独立的生成高清图像。
 
@@ -49,31 +47,31 @@
 
 所谓的Pixel CNN组件，则是让像素的生成除了考虑低分辨率图像上的数据之外，还考虑之前生成的像素。
 
-![](./5.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/pixel_recursive_sr/5.png)
 
 将两种模型分别定义：
 
 - Conditioning Network
 
-	![](./6.png)
+	![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/pixel_recursive_sr/6.png)
 
 - Prior Network
 
-	![](./7.png)
+	![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/pixel_recursive_sr/7.png)
 	
 将两种模型的的输出概率使用softmax混合起来，就得到了最后的目标函数。
 
-![](./8.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/pixel_recursive_sr/8.png)
 
 取log后，得到
 
-![](./9.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/pixel_recursive_sr/9.png)
 
 其中，lse(.)是softmax函数分母部分取log得到。
 
 在实验过程中，发现上述目标函数会倾向于忽略conditioning network，因为Pixel之间的关系太强了。为了改正这个问题，在目标函数中添加一下来强制训练conditioning network。
 
-![](./10.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/pixel_recursive_sr/10.png)
 
 网络都训练好以后，就可以生成高清图像了，生成过程为从左上角开始，得到每个像素的概率分布，按照概率分布进行采样，得到当前像素值后，再去生成下一个像素。
 
@@ -81,7 +79,7 @@
 
 为了对生成过程进行控制，还采用了tempered softmax。所谓的tempered softmax，是对softmax中的logit进行指数乘法，然后再归一化。
 
-![](./11.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/pixel_recursive_sr/11.png)
 
 # 效果
 
@@ -91,8 +89,8 @@
 - NN: Nearest Neighbors Search.
 
 
-![](./12.png)
-![](./13.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/pixel_recursive_sr/12.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/pixel_recursive_sr/13.png)
 
 
 
