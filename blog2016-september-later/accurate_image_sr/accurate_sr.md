@@ -12,7 +12,7 @@ SRCNN已然将深度学习应用到了图像高清化，但是它有三大缺点
 
 虽然SRCNN中得到了更深的模型不能适用于高清化问题的结论，但是本文还是在更深的模型上得到了比较好的效果。
 
-![](./1.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/accurate_image_sr/1.png)
 
 - 除了第一层和最后一层外，都是64个3x3x64的。第一层作用在输入图像上，最后一层是一个3x3x64的核。
 - 使用zero padding来解决图像变小的问题，使输入和输出保持同等大小。
@@ -32,18 +32,18 @@ SRCNN已然将深度学习应用到了图像高清化，但是它有三大缺点
 
 不同初始化学习率下残差网和非残差网在不同迭代次数上的区别。
 
-![](./2.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/accurate_image_sr/2.png)
 
 不同尺度增长下网络模型随深度的变化的效果变化。
 
-![](./3.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/accurate_image_sr/3.png)
 
 残差网和非残差网随迭代次数的变化而变化的趋势。可以看到，残差网可以快速收敛并达到较好的效果。
 
-![](./4.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/accurate_image_sr/4.png)
 
 使用不同尺度的数据集得到的模型在不同尺度数据集上的效果。
-![](./5.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/accurate_image_sr/5.png)
 # 参考文献
 
 [1].Kim J, Kwon Lee J, Mu Lee K. Accurate image super-resolution using very deep convolutional networks[C]//Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2016: 1646-1654.
