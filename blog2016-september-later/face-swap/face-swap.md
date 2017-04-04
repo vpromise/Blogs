@@ -4,7 +4,7 @@
 
 由于图像风格转换的算法框架下是语义级别的图像内容操作，因而，在图像风格转换框架下的换脸可以达到原图的表情、肤色、光照不变。
 
-![](./1.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/face-swap/1.png)
 
 上图中，a是原图，b是由本文描述的算法得到的结果，c是直接使用图像编辑软件得到的结果。
 
@@ -14,7 +14,7 @@
 
 ## 图像预处理
 
-![](./2.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/face-swap/2.png)
 
 想要进行换脸操作，首先要将脸的位置对齐，这个步骤使用两种技术，人脸对齐和背景切分。对齐使用如下步骤：
 
@@ -25,7 +25,7 @@
 
 ## 网络结构
 
-![](./3.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/face-swap/3.png)
 
 延循之前的算法框架，本算法采用一种多尺寸结构，小尺寸的图像经过卷积后自动上采样为2倍大小，然后再和大尺寸的图像进行通道连接。
 
@@ -37,7 +37,7 @@
 
 同[1][2][3]类似，图像的损失函数是基于一个已经训练好的神经网络里的feature_map。类似的，内容损失函数为：
 
-![](./4.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/face-swap/4.png)
 
 ### 风格损失
 
@@ -49,11 +49,11 @@
 
 所以，风格损失函数为：
 
-![](./5.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/face-swap/5.png)
 
-![](./11.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/face-swap/11.png)
 
-![](./10.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/face-swap/10.png)
 
 ### 光照损失
 
@@ -63,49 +63,49 @@
 
 使用从这个网络中得到的feature map进行光照损失的计算
 
-![](./6.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/face-swap/6.png)
 
 ### 平滑损失
 
 与其他类似，
 
-![](./7.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/face-swap/7.png)
 
 ### 损失函数
 
 综上所述，损失函数为
 
-![](./8.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/face-swap/8.png)
 
 # 效果
 
 在本算法框架下，针对每一个目标人脸，都需要一个网络。训练了两个网络，一个是Nicolas Cage，另一个是Taylor Swift。
 
-![](./9.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/face-swap/9.png)
 
 ## 正脸的作用
 
 对比了各种角度人脸的替换结果
 
-![](./12.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/face-swap/12.png)
 
 越是正脸，就越像Cage，原因可能是数据的不均衡性导致的，因为目标图像中侧脸比较少。
 
 ## 光照损失的作用
 
-![](./13.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/face-swap/13.png)
 
 左中右分别为，原图，带光照损失的换脸和不带光照损失的换脸。
 
 ## 风格损失权重的作用
 
-![](./14.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/face-swap/14.png)
 
 左中右分别为，原图，风格损失权重=80，风格损失权重=120。
 
 ## 错误示例
 
-![](./15.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/face-swap/15.png)
 
 左中，遮挡物被去掉了，说明算法不支持遮挡物
 右，效果差，因为不是正脸，且pose比较少见。
@@ -119,7 +119,7 @@
 - 修改损失函数使遮挡物可以保存下来。
 - 增强人脸关键点检测算法。
 - 使用VGG-Face网络来进行内容损失和风格损失的计算。
-
+https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2016-september-later/face-swap/
 # 参考文献
 
 - [1]. [图像风格转换](http://blog.csdn.net/stdcoutzyx/article/details/53771471)
