@@ -7,7 +7,7 @@ GAN[2,3]的出现使得图像生成任务有了长足的进步。一些比较好
 # 背景
 
 首先，我们要了解GAN是什么，简而言之，GAN是一种“道高一尺魔高一丈”的博弈算法，算法分为两个模块，生成器和判别器。生成器负责生成合理的样本，判别器负责判断生成的样本合理与否。在训练过程中，生成器的目标是生成出越来越好的样本去使得判别器失效，而判别器则是要提升自己的判断能力使的不被骗。
-
+https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2017/GAN_text_to_image/
 初始的GAN是将图像和随机向量一一对应起来然后训练得到一个随机向量到图像的映射，这样，从同样的分布中随机一个其他的向量也能得到一张图像。除了这种完全依赖随机向量生成图像的模型外，还可以加入其它的条件因素构建更复杂的模型。比如素描上色，输入即是素描图像，而生成的是添加了颜色的图像。本文的算法与之类似，但这次的输入是图像以外的媒体信息——文字信息。
 
 根据文本描述生成图像，从问题本身来看，是非常的多样化。文本中一个词语的变化可能会导致生成的图像中大量的像素发生改变。这些发生改变的像素之间的关联却很难发现。就连其其反问题图像生成文本描述就没有这样严重的问题，因为文本是可以用语言模型建模的。而GAN恰恰就能解决这样的问题。
@@ -17,7 +17,7 @@ GAN[2,3]的出现使得图像生成任务有了长足的进步。一些比较好
 
 模型结构如下图所示。可以看到，图的左侧是生成网络，右侧是判别网络。
 
-![](./1.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2017/GAN_text_to_image/1.png)
 
 在生成网络中，首先需要对文本进行编码，在这里，使用了[4]中的char-CNN-RNN结构来对文本做embedding。这里，可以使用pre-train的网络直接使用提取好的embedding，也可以直接进行end2end的直接学习参数。文本编码后首先经过一个全连接层(Leaky-Relu激活)压缩到一个较小的维度(128)，然后和一个从正态分布中得到的随机向量进行拼接。然后再将其输入到一些正常的deconvolution层做图像生成。
 
@@ -31,7 +31,7 @@ GAN[2,3]的出现使得图像生成任务有了长足的进步。一些比较好
 
 加上第三种样本后，模型成为GAN-CLS。模型的训练流程如下图所示：
 
-![](./2.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2017/GAN_text_to_image/2.png)
 
 ## 插值法学习
 
@@ -52,8 +52,8 @@ GAN[2,3]的出现使得图像生成任务有了长足的进步。一些比较好
 ## 生成实验
 在CUB数据集(花)和Oxford-102(鸟)数据集上做了实验，效果如下：
 
-![](./3.png)
-![](./4.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2017/GAN_text_to_image/3.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2017/GAN_text_to_image/4.png)
 
 可以看到，在花的实验上，普通的GAN容易生成比较多样性的结果。
 
@@ -61,13 +61,13 @@ GAN[2,3]的出现使得图像生成任务有了长足的进步。一些比较好
 
 ## 风格转换
 
-![](./5.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2017/GAN_text_to_image/5.png)
 
 可以看到，大部分生成图片还是能将背景和位置从风格图片中继承下来。
 
 ## 插值图像
 
-![](./6.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2017/GAN_text_to_image/6.png)
 
 左侧是保持随机向量不变，两段不同的文本做插值，可以看到从左到右，逐渐接近第二句的效果。右侧是保持文本不变，两个随机向量做插值，可以看到，生成的物体没有变化，而背景却在发生渐变。
 
