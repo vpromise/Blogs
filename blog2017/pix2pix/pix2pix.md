@@ -49,7 +49,7 @@ Pix2Pix框架基于GAN，如果对GAN没有了解，出门左转到[对抗神经
 
 正如上所说，输入和输出之间会共享很多的信息。如果使用普通的卷积神经网络，那么会导致每一层都承载保存着所有的信息，这样神经网络很容易出错，因而，使用U-Net来进行减负。
 
-![](3.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2017/pix2pix/3.png)
 
 上图中，首先U-Net也是Encoder-Decoder模型，其次，Encoder和Decoder是对称的。
 所谓的U-Net是将第i层拼接到第n-i层，这样做是因为第i层和第n-i层的图像大小是一致的，可以认为他们承载着类似的信息。
