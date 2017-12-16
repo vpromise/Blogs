@@ -119,6 +119,18 @@ U-Net中使用了skip-connection，而使用与不使用也做了对比实验
 
 可以看到，使用普通的Encoder-Decoder导致了很大的模糊。
 
+# 效果图
+
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2017/pix2pix/12.png)
+
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2017/pix2pix/13.png)
+
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2017/pix2pix/14.png)
+
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2017/pix2pix/15.png)
+
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2017/pix2pix/16.png)
+
 # 总结
 
 本文将Pix2Pix论文中的所有要点都表述了出来，主要包括：
