@@ -4,7 +4,7 @@
 
 多年来，这些任务都需要用不同的模型去生成。在GAN出现之后，这些任务一下子都可以用同一种框架来解决。这个算法的名称叫做Pix2Pix，基于[对抗神经网络](http://blog.csdn.net/stdcoutzyx/article/details/53151038)实现。话不多说，先上一张图。
 
-![](./1.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2017/pix2pix/1.png)
 
 本文是文献[Image-to-image translation with conditional adversarial networks](https://arxiv.org/pdf/1611.07004.pdf)的笔记。
 
@@ -23,7 +23,7 @@ Pix2Pix框架基于GAN，如果对GAN没有了解，出门左转到[对抗神经
 
 但对于图像翻译任务来说，它的G输入显然应该是一张图x，输出当然也是一张图y。但是D的输入却应该发生一些变化，因为除了要生成真实图像之外，还要保证生成的图像和输入图像是匹配的。于是D的输入就做了一些变动，变成了一个<x,y>的Pair。而D要判断的是这个Pair是不是真的，这样就保证了Mapping。因为不真实的图像显然不能被认同为一个Pair，所以D在判断是不是能够成为一对的时候就已经包含了要生成真实图像的信息。
 
-![](./2.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2017/pix2pix/2.png)
 
 当然，如果去除随机变量的输入，那么学到的模型就不能学到一个分布，而只是一个转换函数。有类似的实验在输入中仍然保持着随机向量，但是在这个框架下，随机向量会被自动的忽略掉。不过对于图像翻译来说，转换函数已然足够。
 
@@ -31,19 +31,19 @@ Pix2Pix框架基于GAN，如果对GAN没有了解，出门左转到[对抗神经
 
 依上所述，Pix2Pix的损失函数为
 
-![](./4.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2017/pix2pix/4.png)
 
 为了做对比，同时再去训练一个普通的GAN，即只让D判断是否为真实图像。
 
-![](./5.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2017/pix2pix/5.png)
 
 对于图像翻译任务而言，G的输入和输出之间其实共享了很多信息，比如图像上色任务，输入和输出之间就共享了边信息。因而为了保证输入图像和输出图像之间的相似度。还加入了L1 Loss
 
-![](./6.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2017/pix2pix/6.png)
 
 那么，汇总的损失函数为
 
-![](./7.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2017/pix2pix/7.png)
 
 # 生成网络G
 
@@ -87,7 +87,7 @@ Pix2Pix框架基于GAN，如果对GAN没有了解，出门左转到[对抗神经
 
 使用三种不同的损失函数，cGAN, L1和cGAN+L1，得到结果如下：
 
-![](./8.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2017/pix2pix/8.png)
 
 可以看到，只用L1得到模糊图像，只用cGAN得到的会多很多东西。而L1+cGAN会得到较好的结果。
 
@@ -97,7 +97,7 @@ Pix2Pix框架基于GAN，如果对GAN没有了解，出门左转到[对抗神经
 
 衡量了不同的损失函数下生成的图像色彩与ground truth的区别。
 
-![](./9.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2017/pix2pix/9.png)
 
 发现，L1有更窄的色彩区间，表明L1鼓励生成的图像均值化、灰度化。而cGAN会鼓励生成的图像有更多的色彩。
 
@@ -105,7 +105,7 @@ Pix2Pix框架基于GAN，如果对GAN没有了解，出门左转到[对抗神经
 
 D是基于Patch的，Patch的大小也是一个可以调整的参数。
 
-![](./10.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2017/pix2pix/10.png)
 
 不同的size产生了不同的结果。1x1的patch就是基于Pixel的D，从结果上看，没带来清晰度的提升，但是却带来了更多的颜色。也证明了上一个实验的结论。
 
@@ -115,7 +115,7 @@ D是基于Patch的，Patch的大小也是一个可以调整的参数。
 
 U-Net中使用了skip-connection，而使用与不使用也做了对比实验
 
-![](./11.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2017/pix2pix/11.png)
 
 可以看到，使用普通的Encoder-Decoder导致了很大的模糊。
 
