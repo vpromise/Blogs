@@ -33,7 +33,7 @@
 
 如下图所示，使用RNN生成一层网络结构的五个参数。
 
-![](./1.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2018/NAS_RL/1.png)
 
 可以看到，在RNN中，每五个输出组成一层神经网络。而上一步的输出是下一步的输入，这样保证了RNN是基于前面N-1层所有的参数信息来预测第N层的参数。
 
@@ -47,11 +47,11 @@
 
 所以，这个问题可以建模成下图：
 
-![](./2.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2018/NAS_RL/2.png)
 
 即需要与外界进行交互来获取生成网络结构的准确率。用准确率来作为网络的衡量标准。那么我们对RNN的目标函数的设定是：
 
-![](./3.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2018/NAS_RL/3.png)
 
 即目标函数是生成的网络结构的准确率，我们需要最大化这个准确率，即公式中的R。
 但是生成网络结构的准确率对于RNN来说是无法直接求导的，因为它没有和RNN的softmax联系起来。那么，如何将它们联系起来呢？
@@ -60,17 +60,17 @@
 
 于是就得到
 
-![](./4.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2018/NAS_RL/4.png)
 
 R为生成网络结构的准确率，P为生成该网络结构的概率。但是因为计算资源的限制，我们无法将所有可能的网络结构通通训练一遍（通通训练一遍也即是暴力算法）。因而，在这个公式下，我们使用采样的方法来拟合。
 
-![](./5.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2018/NAS_RL/5.png)
 
 其中，m是采样出来的模型结构的数目，T是参数数目，上述公式计算了对于m个模型中的每一个模型，它的T个参数中每个参数的输出概率都与生成的模型结构的准确率挂钩。
 
 因为准确率是都是正数，而这样对于反向传播的求导是不利的，因而对目标函数做了一点小小的修改:
 
-![](./6.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2018/NAS_RL/6.png)
 
 其中，b为之前训练的所有网络结构的exponential moving average，即按照时间前后用指数加权的平均值。
 
@@ -80,7 +80,7 @@ R为生成网络结构的准确率，P为生成该网络结构的概率。但是
 
 即使加入了控制器来启发式的搜索，仍然需要大量的计算。因而分布式训练是很必须的。分布式的框架如下：
 
-![](./7.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2018/NAS_RL/7.png)
 
 仍然是Parameter Server架构，我们复制K个控制器，它们的参数更新都回传到parameter server来同步。对于每个控制器，生成m个网络结构并且并行的进行计算。得到准确率用来对控制器进行梯度下降计算。
 
@@ -92,11 +92,11 @@ R为生成网络结构的准确率，P为生成该网络结构的概率。但是
 
 为了使刚才描述的框架能生成更复杂的卷积神经网络，可以在控制器中添加注意力机制。
 
-![](./8.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2018/NAS_RL/8.png)
 
 在每一层的预测值中插入一个锚点，第N层的锚点和前面N-1层的所有锚点都有一个连接，每一层的锚点有（层数-1)个输出，分别代表前面的每一层是否该作为当前层的输入。
 
-![](./9.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2018/NAS_RL/9.png)
 
 在这种情况下，因为不同的层的feature map的大小是不同的，当不同的层拼接到一起时，会有尺寸不兼容的情况，为了解决这个问题，对较小尺寸的feature map做padding处理。同时，加上另外两种处理：
 
@@ -116,7 +116,7 @@ R为生成网络结构的准确率，P为生成该网络结构的概率。但是
 
 比如，如果预测两个输入的拼接方式为加，激活函数为tanh，那么就得到普通的RNN
 
-![](./10.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2018/NAS_RL/10.png)
 
 我们可以将两个输入复制多份，从而可以得到不同的输出（因为拼接方式和激活函数会不同）。不同的输出又可以使用两个输入一个输出的这种结构进行组合，得到新的值。其中，两个输入复制多份的那个份数被称之为“base N”。
 
@@ -124,8 +124,8 @@ R为生成网络结构的准确率，P为生成该网络结构的概率。但是
 
 具体不在赘述，大家直接看论文中的图和解释即可.
 
-![](./11.png)
-![](./12.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2018/NAS_RL/11.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2018/NAS_RL/12.png)
 
 在这里比较有意思的是，使用循环神经网络来预测循环神经网络的结构。如果将生成好的循环网络结构再用作控制器，就成了自我升级和迭代了。
 
@@ -173,23 +173,23 @@ R为生成网络结构的准确率，P为生成该网络结构的概率。但是
 
 在得到最后的网络结构后，再对这个结构进行其他参数如learning_rate，weigh_decay, batch_norm的grid search，得到最优结果。
 
-![](./13.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2018/NAS_RL/13.png)
 
 ## 循环神经网络结果
 
 做了grid search后，得到最右结果。
 
-![](./14.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2018/NAS_RL/14.png)
 
 # 生成的网络结构
 
 ## 卷积神经网络
 
-![](./15.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2018/NAS_RL/15.png)
 
 ## 循环神经网络
 
-![](./16.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2018/NAS_RL/16.png)
 
 
 # 参考文献
