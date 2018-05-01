@@ -14,7 +14,7 @@
 
 有了这两个Cell之后，就可以得到一个完整的神经网络。如下图所示：
 
-![](./1.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2018/transferrable_architecture/1.png)
 
 更具体的，每个Cell有更细致的微结构。从大的层面来看，Normal Cell和Reduction Cell都接受两个输入h<sub>i</sub>和h<sub>i-1</sub>。从小的层面看，Normal Cell和Reduction Cell中的子结构也是类似的，两个输入得到一个输出。但子结构的输入不一定是Cell的输入，也可能是中间状态。
 
@@ -30,7 +30,7 @@
 
 其中，第三步和第四步的操作集合如下：
 
-![](./2.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2018/transferrable_architecture/2.png)
 
 第五步的操作有两个：
 
@@ -39,11 +39,11 @@
 
 将上述步骤重复B次，其中每次称之为一个Block。每次生成的子结构如下：
 
-![](./3.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2018/transferrable_architecture/3.png)
 
 每一个Block的生成如下：
 
-![](./4.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2018/transferrable_architecture/4.png)
 
 在生成Cell最后的输出的时候，将所有没有用到的Hidden states拼接到一起，作为输出。
 
@@ -56,19 +56,19 @@
 
 经过学习，得到的最终的Normal Cell和Reduction Cell的结构如下：
 
-![](./5.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2018/transferrable_architecture/5.png)
 
-![](./6.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2018/transferrable_architecture/6.png)
 
 ## 实验结果
 
 在cifar10上的实验结果如下：
 
-![](./7.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2018/transferrable_architecture/7.png)
 
 在ImageNet数据集上的实验结果如下：
 
-![](./8.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2018/transferrable_architecture/8.png)
 # 参考文献
 
 [1]. Zoph B, Vasudevan V, Shlens J, et al. Learning transferable architectures for scalable image recognition[J]. arXiv preprint arXiv:1707.07012, 2017.
