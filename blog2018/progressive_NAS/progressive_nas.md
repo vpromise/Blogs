@@ -22,7 +22,7 @@
 
 剩余的8个operator为：
 
-![](./1.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2018/progressive_NAS/1.png)
 
 在[第二篇](https://zhuanlan.zhihu.com/p/36301731)中，使用了递归方法来生成Normal Cell和Reduction Cell。递归步骤就是
 
@@ -35,7 +35,7 @@
 
 对于第一次运行生成方法，只有两个输入，因而，选取两次，得到2x2种可能。有八种operator，选取两次，得到8x8中可能，因而第一次运行该方法的空间是2<sup>2</sup>x8<sup>2</sup>。而对于第二次运行生成方法，operator选择的可能性没有变化，但因为上一步有一个隐含状态输出，所以输入变成了3x3中可能。以此类推，五次运行生成算法的搜索空间是
 
-![](./2.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2018/progressive_NAS/2.png)
 
 依然很大！
 
@@ -45,11 +45,11 @@
 
 上面生成的结构如下图所示：
 
-![](./3.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2018/progressive_NAS/3.png)
 
 而将上面的结构复制几份，在某些份上将stride设为2，就可以组成一个神经网络
 
-![](./4.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2018/progressive_NAS/4.png)
 
 # 由浅及深训练网络
 
@@ -82,13 +82,13 @@
 
 具体如下图所示：
 
-![](./5.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2018/progressive_NAS/5.png)
 
 # 实验
 
 ## 启发式搜索算法
 
-![](./6.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2018/progressive_NAS/6.png)
 
 上面一行是使用当前结构的训练数据，预测当前结构的排序好坏。下面一行是使用当前结构的训练数据，预测下一个结构的排序好坏。
 
@@ -97,7 +97,7 @@
 
 ## Cifar10 结果
 
-![](./7.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2018/progressive_NAS/7.png)
 
 M为需要训练的模型数目。E为每次训练模型需要的样本数目。MxE为训练所有模型总共训练使用的样本数目。
 
@@ -106,11 +106,11 @@ M为需要训练的模型数目。E为每次训练模型需要的样本数目。
 # ImageNet 结果
 
 小网络结果（用于Mobile）
-![](./8.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2018/progressive_NAS/8.png)
 
 大网络结果
 
-![](./9.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2018/progressive_NAS/9.png)
 
 # 参考文献
 
