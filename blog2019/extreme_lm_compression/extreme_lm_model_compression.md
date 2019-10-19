@@ -34,7 +34,7 @@
 
 如下图所示，左面是一个30522 wordpiece词表的Bert模型，大小是12-layer, hidden-state和embedding都是768，是一个已经预训练好的模型Bert-base，在这里被用作Teacher模型。
 右面是一个4928 wordpiece词表的模型，是student模型，需要注意的是，student模型中的词表不是teacher模型词表的子集，而是互有交叉的关系，student模型的词表中的93.9%的词语在teacher模型的词表中。
-![](./1.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2019/extreme_lm_compression/1.png)
 
 因为词表不同，所以teacher模型和student模型对一个词的切分可能是不同的，而且，Bert训练时的output可能也是不同的。这样原始的知识蒸馏的方法就不能直接使用了。这就需要有对偶训练。
 
@@ -49,11 +49,11 @@
 
 在知识蒸馏时，只用teacher的输出作为要学习的知识给student可能还不够，在论文中，提出了一种共享映射的方式，在这种方式中，给teacher模型中的参数乘以两个矩阵U和V，使得这个参数和student模型中对应位置上的参数有一样的维度。此时再用L2损失去计算参数之间的距离。示意图如上图，公式如下图。
 
-![](./2.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2019/extreme_lm_compression/2.png)
 
 这种方式还可以反向，即给student模型中的参数乘以两个矩阵，去和teacher模型中的参数做L2 loss。如下图：
 
-![](./3.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2019/extreme_lm_compression/3.png)
 
 当然，这种方法中，U和V在inference的时候是不需要的。它们只是做蒸馏用的桥梁。而且有这个损失的话，模型层数就需要跟teacher一样了。
 
@@ -68,16 +68,16 @@
 
 所以总的损失函数为：
 
-![](./4.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2019/extreme_lm_compression/4.png)
 
 
 ## 实验结果
 
 不同的小模型的参数量和计算量如下：
-![](./5.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2019/extreme_lm_compression/5.png)
 
 在下游任务上的结果如下：
-![](./6.png)
+![](https://raw.githubusercontent.com/stdcoutzyx/Blogs/master/blog2019/extreme_lm_compression/6.png)
 
 从结果中看， 对偶训练可以一直带来提升。 ShardProjDown比ShardProjUp更有优势一些。
 
