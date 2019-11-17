@@ -93,6 +93,13 @@ hidden size的影响：
 去掉dropout的影响。
 ![](./14.png)
 
+## 展望
+
+虽然ALBert解决了模型大小的问题，但是计算量的问题并没有解决，因为层次间参数共享并不会省略计算。因而，这块还可以尝试sparse attention或者block attention等。
+
+还可以通过hard example mining与more efficient language modeling training来进一步提升模型的表达能力。
+
+虽然句子顺序预测效果不错，不过在这个方向上还有更多可以挖掘的地方。
 
 ## 参考文献
 
